@@ -97,6 +97,14 @@ function releaseCard(file, isLatest) {
           ${file.license_key ? `<button class="license-key-button" type="button" data-license-key="${escapeHtml(file.license_key)}">Copy</button>` : ""}
         </div>
 
+        <div class="license-key-box rar-password-box">
+          <div class="license-key-copy">
+            <span class="license-key-label">RAR Password</span>
+            <code>${escapeHtml(file.rar_password || "Not provided")}</code>
+          </div>
+          ${file.rar_password ? `<button class="license-key-button" type="button" data-rar-password="${escapeHtml(file.rar_password)}">Copy</button>` : ""}
+        </div>
+
         <div class="update-actions">
           ${url && downloadable
             ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>`
@@ -160,15 +168,16 @@ document.addEventListener("DOMContentLoaded", loadReleases);
 
 
 document.addEventListener("click", async (event) => {
-  const button = event.target.closest("[data-license-key]");
+  const button = event.target.closest("[data-license-key], [data-rar-password]");
   if (!button) return;
-  const key = button.dataset.licenseKey || "";
+  const isRarPassword = button.hasAttribute("data-rar-password");
+  const key = isRarPassword ? (button.dataset.rarPassword || "") : (button.dataset.licenseKey || "");
   if (!key) return;
   try {
     await navigator.clipboard.writeText(key);
     const original = button.textContent;
     button.textContent = "Copied";
-    showCopyNotification("License key copied");
+    showCopyNotification(isRarPassword ? "RAR password copied" : "License key copied");
     setTimeout(() => { button.textContent = original; }, 1400);
   } catch (_) {}
 });
