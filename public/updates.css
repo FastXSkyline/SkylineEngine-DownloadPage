@@ -194,11 +194,11 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  z-index:0;
+  z-index:10;
   top:0;
   bottom:0;
-  left:-7px;
-  width:7px;
+  left:-12px;
+  width:10px;
   border-radius:14px 0 0 14px;
   background:#ff2d2d;
   box-shadow:none;
