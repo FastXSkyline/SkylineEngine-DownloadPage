@@ -190,6 +190,21 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   transition:filter 260ms ease,opacity 260ms ease,transform 260ms ease;
 }
 
+/* State decoration: a rounded duplicate panel pushed slightly outside the left edge. */
+.update-card::before {
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:0;
+  bottom:0;
+  left:-7px;
+  width:7px;
+  border-radius:14px 0 0 14px;
+  background:#ff2d2d;
+  box-shadow:none;
+  pointer-events:none;
+}
+
 .update-card.is-current {
   border-color:rgba(50,213,131,.18);
   background:
@@ -202,8 +217,8 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 }
 
 .update-card.is-current::before {
-  background:linear-gradient(180deg,#32d583,#1ca866);
-  box-shadow:0 0 18px rgba(50,213,131,.35);
+  background:#32d583;
+  box-shadow:none;
 }
 
 .update-card.is-current .update-version {
@@ -221,7 +236,6 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   background:#32d583;
   box-shadow:0 0 11px rgba(50,213,131,.65),0 0 18px rgba(50,213,131,.28);
 }
-
 
 .update-card.is-current .update-download {
   border-color:rgba(50,213,131,.28);
@@ -277,10 +291,6 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   border-color:rgba(255,255,255,.11);
   border-radius:14px;
   box-shadow:0 22px 55px rgba(0,0,0,.30);
-}
-
-.update-card.is-outdated:hover::after {
-  border-radius:14px;
 }
 
 .update-card.is-outdated:hover .update-card-content {
