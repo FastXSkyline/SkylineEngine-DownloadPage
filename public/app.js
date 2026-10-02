@@ -48,8 +48,8 @@ async function loadReleases() {
 
   try {
     const response = await fetch(RELEASES_API, {
-      cache: "no-store",
-      headers: { "Cache-Control": "no-cache" }
+      method: "GET",
+      cache: "no-store"
     });
     const data = await response.json().catch(() => ({}));
 
