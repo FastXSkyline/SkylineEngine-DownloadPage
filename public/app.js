@@ -96,7 +96,7 @@ function releaseCard(file) {
           </div>
 
           <div class="update-actions">
-            ${url && downloadable ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>` : `<span class="update-download" aria-disabled="true">${downloadLabel}</span>`}
+            ${url && downloadable ? `<a class="update-download" href="${escapeHtml(url)}" data-download-id="${escapeHtml(file.id)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>` : `<span class="update-download" aria-disabled="true">${downloadLabel}</span>`}
           </div>
         </div>
       </div>
@@ -176,7 +176,32 @@ function showCopyNotification(message) {
 }
 
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
+  const download = event.target.closest("[data-download-id]");
+  if (download) {
+    event.preventDefault();
+    if (download.dataset.counting === "1") return;
+    const id = download.dataset.downloadId || "";
+    const targetUrl = download.href;
+    download.dataset.counting = "1";
+    download.setAttribute("aria-disabled", "true");
+
+    try {
+      const response = await fetch(`https://skylineenginestats.anesteb8.workers.dev/api/public/fivem/files/${encodeURIComponent(id)}/download`, {
+        method: "POST",
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("Download counter request failed");
+    } catch (error) {
+      console.error("Failed to record download:", error);
+    } finally {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+      download.dataset.counting = "0";
+      download.removeAttribute("aria-disabled");
+    }
+    return;
+  }
+
   const toggle = event.target.closest(".release-toggle");
   if (!toggle) return;
   const card = toggle.closest(".update-card");
