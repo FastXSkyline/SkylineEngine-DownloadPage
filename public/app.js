@@ -136,7 +136,7 @@ async function loadReleases() {
     const orderedFiles = files.slice().sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
 
     container.innerHTML = orderedFiles
-      .map(({ file }) => releaseCard(file, false))
+      .map((file) => releaseCard(file, false))
       .join("");
   } catch (error) {
     console.error("Failed to load releases:", error);
