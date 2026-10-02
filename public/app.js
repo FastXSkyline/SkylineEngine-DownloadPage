@@ -89,6 +89,13 @@ function releaseCard(file, isLatest) {
           </div>
         </div>
 
+        <div class="license-key-box">
+          <div class="license-key-copy">
+            <span class="license-key-label">License Key</span>
+            <code>${escapeHtml(file.license_key || "Not provided")}</code>
+          </div>
+          ${file.license_key ? `<button class="license-key-button" type="button" data-license-key="${escapeHtml(file.license_key)}">Copy</button>` : ""}
+        </div>"}
         <div class="update-actions">
           ${url && downloadable
             ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>`
@@ -149,3 +156,17 @@ async function loadReleases() {
 }
 
 document.addEventListener("DOMContentLoaded", loadReleases);
+
+
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-license-key]");
+  if (!button) return;
+  const key = button.dataset.licenseKey || "";
+  if (!key) return;
+  try {
+    await navigator.clipboard.writeText(key);
+    const original = button.textContent;
+    button.textContent = "Copied";
+    setTimeout(() => { button.textContent = original; }, 1400);
+  } catch (_) {}
+});
