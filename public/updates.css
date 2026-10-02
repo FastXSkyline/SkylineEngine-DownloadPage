@@ -33,11 +33,11 @@
 .update-card::before{
   content:"";
   position:absolute;
-  left:0;
+  left:-5px;
   top:12px;
   bottom:12px;
   width:4px;
-  border-radius:0 5px 5px 0;
+  border-radius:5px 0 0 5px;
   background:#ff2d2d;
   box-shadow:0 0 16px rgba(255,45,45,.22);
   pointer-events:none;
