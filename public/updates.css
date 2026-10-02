@@ -7,7 +7,7 @@
 
 .update-card{
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   padding:0;
   border:1px solid rgba(255,255,255,.075);
   border-radius:14px;
@@ -33,13 +33,13 @@
 .update-card::before{
   content:"";
   position:absolute;
-  left:-5px;
+  left:-6px;
   top:12px;
   bottom:12px;
   width:4px;
   border-radius:5px 0 0 5px;
   background:#ff2d2d;
-  box-shadow:0 0 16px rgba(255,45,45,.22);
+  box-shadow:none;
   pointer-events:none;
   z-index:2;
 }
@@ -59,7 +59,7 @@
 
 .update-card.is-current::before{
   background:#32d583;
-  box-shadow:0 0 16px rgba(50,213,131,.20);
+  box-shadow:none;
 }
 
 .update-card.is-outdated::before{
