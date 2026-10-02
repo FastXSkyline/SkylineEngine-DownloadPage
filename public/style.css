@@ -1196,3 +1196,50 @@ body{
   from{opacity:0;transform:translateY(8px) scale(.992);filter:blur(4px)}
   to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
+
+
+/* ============================================================
+   Lighter dark Skyline theme refinement
+   ============================================================ */
+:root{
+  --bg:#0c0e14;
+  --shell:#11141c;
+  --sidebar:#151821;
+  --surface-hover:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.085);
+  --border-strong:rgba(255,255,255,.14);
+  --muted:#9a9daa;
+  --faint:#6f727e;
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 88% -16%,rgba(158,170,204,.28),transparent 60%),
+    radial-gradient(760px 520px at -8% 106%,rgba(255,45,45,.085),transparent 58%),
+    linear-gradient(158deg,#252a39 0%,#181c28 46%,#0d0f16 100%);
+  background-color:var(--bg);
+}
+
+.layout{
+  background:linear-gradient(140deg,rgba(19,22,31,.985),rgba(12,14,21,.995));
+  background-color:var(--shell);
+}
+
+.sidebar{
+  background:linear-gradient(180deg,rgba(27,30,42,.97),rgba(17,20,29,.99));
+  background-color:var(--sidebar);
+}
+
+.stat-card,
+.panel-card{
+  background:linear-gradient(180deg,rgba(31,34,46,.90),rgba(18,21,29,.94));
+}
+
+.user-pack{
+  background:linear-gradient(135deg,rgba(31,34,44,.96),rgba(17,20,28,.98));
+}
+
+.dropdown-menu,
+.chart-tooltip{
+  background:rgba(22,25,34,.97);
+}
