@@ -616,3 +616,127 @@
 .rar-password-box{
   border-color:rgba(255,45,45,.13);
 }
+
+
+/* Compact archived releases: keep unavailable versions small until opened. */
+.update-card.is-collapsed .update-card-content{
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+.update-card.is-collapsed .update-card-summary{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.update-card.is-collapsed .update-card-top{
+  flex:1 1 auto;
+  min-width:0;
+  align-items:center;
+}
+
+.update-card.is-collapsed .update-title{
+  margin-top:7px;
+  font-size:17px;
+}
+
+.update-card.is-collapsed .update-description{
+  margin-top:4px;
+  max-width:620px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.update-card.is-collapsed .update-status{
+  margin-top:0;
+}
+
+.update-card-details{
+  display:grid;
+  grid-template-rows:1fr;
+  transition:grid-template-rows 320ms cubic-bezier(.22,1,.36,1),opacity 220ms ease;
+}
+
+.update-card-details > *{
+  min-height:0;
+}
+
+.update-card.is-collapsed .update-card-details{
+  grid-template-rows:0fr;
+  opacity:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.update-card.is-expanded .update-card-details{
+  opacity:1;
+}
+
+.release-toggle{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-width:108px;
+  height:32px;
+  padding:0 11px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:7px;
+  background:rgba(255,255,255,.025);
+  color:#b8bbc3;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:color 160ms ease,background 160ms ease,border-color 160ms ease,transform 160ms ease,box-shadow 160ms ease;
+}
+
+.release-toggle:hover{
+  transform:translateY(-1px);
+  color:#f2f3f5;
+  border-color:rgba(255,45,45,.32);
+  background:rgba(255,45,45,.055);
+  box-shadow:0 7px 18px rgba(255,45,45,.06);
+}
+
+.release-toggle-icon{
+  display:inline-block;
+  font-size:12px;
+  line-height:1;
+  transition:transform 220ms ease;
+}
+
+.update-card.is-expanded .release-toggle-icon{
+  transform:translateY(1px);
+}
+
+.update-card.is-collapsed::before{
+  background:#555963;
+  box-shadow:none;
+}
+
+.update-card.is-collapsed:hover::before{
+  box-shadow:0 0 7px rgba(255,255,255,.16),0 0 18px rgba(255,255,255,.06);
+}
+
+@media (max-width:700px){
+  .update-card.is-collapsed .update-card-summary{
+    align-items:stretch;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .update-card.is-collapsed .update-card-top{
+    align-items:flex-start;
+  }
+
+  .update-card.is-collapsed .update-description{
+    max-width:100%;
+  }
+
+  .release-toggle{
+    width:100%;
+  }
+}
