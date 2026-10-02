@@ -611,3 +611,8 @@
   border-color:rgba(255,45,45,.30);
   background:linear-gradient(180deg,rgba(255,45,45,.12),rgba(255,45,45,.055));
 }
+
+
+.rar-password-box{
+  border-color:rgba(255,45,45,.13);
+}
