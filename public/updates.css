@@ -467,3 +467,70 @@
     width:100%;
   }
 }
+
+.license-key-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:14px;
+  padding:11px 12px 11px 13px;
+  border:1px solid rgba(255,45,45,.12);
+  border-radius:9px;
+  background:rgba(255,45,45,.025);
+}
+
+.license-key-copy{
+  min-width:0;
+}
+
+.license-key-label{
+  display:block;
+  margin-bottom:5px;
+  color:rgba(255,255,255,.30);
+  font-size:9px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+
+.license-key-box code{
+  display:block;
+  overflow:hidden;
+  color:rgba(255,255,255,.78);
+  font-family:Consolas,Monaco,monospace;
+  font-size:11px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.license-key-button{
+  flex:0 0 auto;
+  min-width:64px;
+  height:30px;
+  padding:0 12px;
+  border:1px solid rgba(255,45,45,.25);
+  border-radius:7px;
+  background:rgba(255,45,45,.06);
+  color:#f2f3f5;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:background 160ms ease,border-color 160ms ease,box-shadow 160ms ease;
+}
+
+.license-key-button:hover{
+  background:rgba(255,45,45,.11);
+  border-color:rgba(255,45,45,.48);
+  box-shadow:0 7px 18px rgba(255,45,45,.08);
+}
+
+@media (max-width:700px){
+  .license-key-box{
+    align-items:stretch;
+  }
+
+  .license-key-button{
+    align-self:center;
+  }
+}
