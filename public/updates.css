@@ -198,7 +198,8 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.04),
     0 22px 60px rgba(0,0,0,.24),
-    0 0 26px rgba(50,213,131,.045);
+    0 0 34px rgba(50,213,131,.16),
+    0 0 70px rgba(50,213,131,.06);
 }
 
 .update-card.is-current::before {
@@ -273,7 +274,12 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card.is-outdated:hover {
   transform:translateY(-2px);
   border-color:rgba(255,255,255,.11);
+  border-radius:14px;
   box-shadow:0 22px 55px rgba(0,0,0,.30);
+}
+
+.update-card.is-outdated:hover::after {
+  border-radius:14px;
 }
 
 .update-card.is-outdated:hover .update-card-content {
@@ -285,6 +291,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .outdated-overlay {
   position:absolute;
   inset:0;
+  border-radius:14px;
   z-index:5;
   display:flex;
   align-items:center;
