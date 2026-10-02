@@ -194,14 +194,13 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  z-index:10;
-  top:0;
-  bottom:0;
-  left:-12px;
-  width:10px;
-  border-radius:14px 0 0 14px;
+  z-index:-1;
+  top:-1px;
+  bottom:-1px;
+  left:-8px;
+  width:100%;
+  border-radius:15px;
   background:#ff2d2d;
-  box-shadow:none;
   pointer-events:none;
 }
 
@@ -217,8 +216,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 }
 
 .update-card.is-current::before {
-  background:#32d583;
-  box-shadow:none;
+  background:linear-gradient(180deg,#32d583,#1ca866);
 }
 
 .update-card.is-current .update-version {
@@ -257,7 +255,6 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 
 .update-card.is-outdated::before {
   background:#555963;
-  box-shadow:none;
 }
 
 .update-card.is-outdated .update-card-content {
