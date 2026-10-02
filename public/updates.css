@@ -7,6 +7,8 @@
 
 .update-card{
   position:relative;
+  z-index:0;
+  isolation:isolate;
   overflow:visible;
   padding:0;
   border:1px solid rgba(255,255,255,.075);
@@ -41,7 +43,7 @@
   background:#ff2d2d;
   box-shadow:none;
   pointer-events:none;
-  z-index:0;
+  z-index:-1;
 }
 
 .update-card::after{
