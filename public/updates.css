@@ -39,9 +39,30 @@
   width:4px;
   border-radius:0 5px 5px 0;
   background:#ff2d2d;
-  box-shadow:0 0 16px rgba(255,45,45,.22);
+  box-shadow:0 0 0 rgba(255,45,45,0);
   pointer-events:none;
   z-index:2;
+  transition:box-shadow 240ms ease,filter 240ms ease;
+}
+
+.update-card:hover::before{
+  box-shadow:
+    0 0 8px rgba(255,45,45,.42),
+    0 0 18px rgba(255,45,45,.24),
+    0 0 30px rgba(255,45,45,.12);
+  filter:brightness(1.08);
+}
+
+.update-card.is-current::before{
+  background:#32d583;
+  box-shadow:0 0 0 rgba(50,213,131,0);
+}
+
+.update-card.is-current:hover::before{
+  box-shadow:
+    0 0 8px rgba(50,213,131,.45),
+    0 0 18px rgba(50,213,131,.26),
+    0 0 30px rgba(50,213,131,.13);
 }
 
 .update-card::after{
