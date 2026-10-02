@@ -177,11 +177,11 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  inset:0 auto 0 -5px;
-  width:3px;
+  inset:0 auto 0 -7px;
+  width:6px;
   height:100%;
   border:0;
-  border-radius:14px 0 0 14px;
+  border-radius:6px;
   background:#ff2d2d;
   box-shadow:0 0 18px rgba(255,45,45,.35);
   pointer-events:none;
