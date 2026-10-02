@@ -7,7 +7,7 @@ margin-top:20px;
 
 .update-card {
 position:relative;
-overflow:hidden;
+overflow:visible;
 padding:24px;
 border:1px solid rgba(255,255,255,.08);
 border-radius:14px;
@@ -175,8 +175,6 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
    Release library — current / outdated states
    ============================================================ */
 .update-card {
-  isolation:isolate;
-  z-index:0;
   transition:
     transform 220ms cubic-bezier(.22,1,.36,1),
     border-color 220ms ease,
@@ -195,14 +193,17 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  z-index:-2;
-  top:-1px;
-  bottom:-1px;
+  inset:0;
   left:-8px;
+  margin:auto;
   width:100%;
+  height:calc(100% + 6px);
   border-radius:15px;
-  background:#ff2d2d;
+  background:linear-gradient(-45deg,#ff0000 0%,#d80000 40%);
+  z-index:-10;
   pointer-events:none;
+  transition:all .8s cubic-bezier(.175,.95,.9,1.275);
+  box-shadow:0 20px 30px hsla(0,0%,0%,.521);
 }
 
 .update-card.is-current {
@@ -255,7 +256,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 }
 
 .update-card.is-outdated::before {
-  background:#555963;
+  background:linear-gradient(180deg,#555963,#3e4148);
 }
 
 .update-card.is-outdated .update-card-content {
