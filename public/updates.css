@@ -31,44 +31,6 @@
     inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* Small state-colored backing tab. It stays entirely at the left edge. */
-.update-card::before{
-  content:"";
-  position:absolute;
-  left:-8px;
-  top:0;
-  bottom:0;
-  width:12px;
-  border-radius:5px 0 0 5px;
-  background:#ff2d2d;
-  box-shadow:none;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.update-card::after{
-  content:"";
-  position:absolute;
-  top:-90px;
-  right:-80px;
-  width:190px;
-  height:190px;
-  border-radius:50%;
-  background:rgba(255,45,45,.035);
-  filter:blur(38px);
-  pointer-events:none;
-}
-
-.update-card.is-current::before{
-  background:#32d583;
-  box-shadow:none;
-}
-
-.update-card.is-outdated::before{
-  background:#555963;
-  box-shadow:none;
-}
-
 .update-card-content{
   position:relative;
   z-index:3;
