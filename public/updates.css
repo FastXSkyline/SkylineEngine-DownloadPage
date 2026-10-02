@@ -183,7 +183,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   inset:0;
   left:-8px;
   margin:auto;
-  width:100%;
+  width:18px;
   height:calc(100% + 6px);
   border-radius:15px;
   background:linear-gradient(-45deg,#ff0000 0%,#d80000 40%);
