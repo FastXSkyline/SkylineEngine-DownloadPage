@@ -198,8 +198,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.04),
     0 22px 60px rgba(0,0,0,.24),
-    0 0 34px rgba(50,213,131,.16),
-    0 0 70px rgba(50,213,131,.06);
+    0 0 26px rgba(50,213,131,.045);
 }
 
 .update-card.is-current::before {
@@ -215,12 +214,14 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 
 .update-card.is-current .update-status {
   color:#72dfa4;
+  text-shadow:0 0 10px rgba(50,213,131,.28);
 }
 
 .update-card.is-current .update-status::before {
   background:#32d583;
-  box-shadow:0 0 11px rgba(50,213,131,.65);
+  box-shadow:0 0 11px rgba(50,213,131,.65),0 0 18px rgba(50,213,131,.28);
 }
+
 
 .update-card.is-current .update-download {
   border-color:rgba(50,213,131,.28);
