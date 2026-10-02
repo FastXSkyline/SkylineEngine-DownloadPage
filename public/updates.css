@@ -147,3 +147,25 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .file-info-label{color:rgba(255,255,255,.32);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
 .file-info-value{color:rgba(255,255,255,.72);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:700px){.update-file-info{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* FiveM library presentation */
+.update-card {
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  border-color:rgba(255,255,255,.09);
+  box-shadow:0 22px 60px rgba(0,0,0,.24);
+}
+.update-card::after {
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-90px;
+  top:-110px;
+  border-radius:50%;
+  background:rgba(255,45,45,.055);
+  filter:blur(30px);
+  pointer-events:none;
+}
+.update-title { font-size:22px; }
+.update-description { max-width:760px; }
+.update-download { min-width:150px; padding:11px 18px; }
