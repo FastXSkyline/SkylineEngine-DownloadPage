@@ -95,7 +95,8 @@ function releaseCard(file, isLatest) {
             <code>${escapeHtml(file.license_key || "Not provided")}</code>
           </div>
           ${file.license_key ? `<button class="license-key-button" type="button" data-license-key="${escapeHtml(file.license_key)}">Copy</button>` : ""}
-        </div>"}
+        </div>
+
         <div class="update-actions">
           ${url && downloadable
             ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>`
