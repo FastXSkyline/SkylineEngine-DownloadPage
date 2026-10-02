@@ -1,4 +1,6 @@
 const RELEASES_API = "https://skylineenginestats.anesteb8.workers.dev/api/public/fivem/files";
+let allReleases = [];
+let activeReleaseCategory = "free-menu";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -102,6 +104,22 @@ function releaseCard(file) {
       </div>
     </article>`;
 }
+function releaseCategory(file) {
+  const raw = `${file.category || ""} ${file.name || ""}`.toLowerCase();
+  return raw.includes("fps") ? "fps-packs" : "free-menu";
+}
+
+function renderReleaseCategory() {
+  const container = document.getElementById("fivemReleases");
+  if (!container) return;
+  const files = allReleases.filter((file) => releaseCategory(file) === activeReleaseCategory);
+  if (!files.length) {
+    container.innerHTML = `<div class="release-loading"><strong>No ${activeReleaseCategory === "fps-packs" ? "FPS packs" : "free menu"} published yet.</strong><span>Published releases in this category will appear here automatically.</span></div>`;
+    return;
+  }
+  container.innerHTML = files.map((file) => releaseCard(file)).join("");
+}
+
 async function loadReleases() {
   const container = document.getElementById("fivemReleases");
   if (!container) return;
@@ -213,4 +231,17 @@ document.addEventListener("click", async (event) => {
   toggle.innerHTML = expanded
     ? 'Hide release<span class="release-toggle-icon">⌃</span>'
     : 'View release<span class="release-toggle-icon">⌄</span>';
+});
+
+
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest("[data-release-category]");
+  if (!tab) return;
+  activeReleaseCategory = tab.dataset.releaseCategory || "free-menu";
+  document.querySelectorAll(".release-tab").forEach((item) => {
+    const selected = item === tab;
+    item.classList.toggle("active", selected);
+    item.setAttribute("aria-selected", String(selected));
+  });
+  renderReleaseCategory();
 });
