@@ -177,11 +177,13 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  inset:0 auto 0 -7px;
+  top:0;
+  bottom:0;
+  left:-7px;
   width:6px;
-  height:100%;
+  height:auto;
   border:0;
-  border-radius:6px;
+  border-radius:14px;
   background:#ff2d2d;
   box-shadow:0 0 18px rgba(255,45,45,.35);
   pointer-events:none;
@@ -189,21 +191,25 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 }
 
 .update-card.is-current::before {
-  inset:0 auto 0 0;
-  width:2px;
+  top:0;
+  bottom:0;
+  left:-7px;
+  width:6px;
   height:auto;
   border:0;
-  border-radius:0 10px 10px 0;
+  border-radius:14px;
   background:linear-gradient(180deg,#32d583,#1ca866);
   box-shadow:0 0 18px rgba(50,213,131,.35);
 }
 
 .update-card.is-outdated::before {
-  inset:0 auto 0 0;
-  width:2px;
+  top:0;
+  bottom:0;
+  left:-7px;
+  width:6px;
   height:auto;
   border:0;
-  border-radius:0 10px 10px 0;
+  border-radius:14px;
   background:#555963;
   box-shadow:none;
 }
