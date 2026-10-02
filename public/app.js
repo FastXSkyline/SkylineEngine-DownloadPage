@@ -36,7 +36,7 @@ function compareVersions(a, b) {
   return 0;
 }
 
-function releaseCard(file, isLatest) {
+function releaseCard(file) {
   const version = file.version ? "v" + file.version.replace(/^v/i, "") : "Release";
   const category = file.category || "Application";
   const platform = file.platform || "Windows";
@@ -46,86 +46,62 @@ function releaseCard(file, isLatest) {
   const statusClass = downloadable ? "is-current" : "is-outdated";
   const statusText = downloadable ? "Download available" : "Download disabled";
   const downloadLabel = downloadable ? "Download" : "Unavailable";
+  const collapsedClass = downloadable ? "" : " is-collapsed";
 
   return `
-    <article class="update-card ${statusClass}">
+    <article class="update-card ${statusClass}${collapsedClass}">
       <div class="update-card-content">
-        <div class="update-card-top">
-          <div>
-            <span class="update-version">${escapeHtml(category)} · ${escapeHtml(version)}</span>
-            <h3 class="update-title">${escapeHtml(file.name || "Untitled release")}</h3>
-            <p class="update-description">${escapeHtml(file.description || "No description provided.")}</p>
+        <div class="update-card-summary">
+          <div class="update-card-top">
+            <div>
+              <span class="update-version">${escapeHtml(category)} · ${escapeHtml(version)}</span>
+              <h3 class="update-title">${escapeHtml(file.name || "Untitled release")}</h3>
+              <p class="update-description">${escapeHtml(file.description || "No description provided.")}</p>
+            </div>
+            <span class="update-status">${escapeHtml(statusText)}</span>
           </div>
-          <span class="update-status">${escapeHtml(statusText)}</span>
+          ${!downloadable ? `<button class="release-toggle" type="button" aria-expanded="false">View release<span class="release-toggle-icon">⌄</span></button>` : ""}
         </div>
 
-        <div class="update-meta">
-          <div class="update-meta-item">
-            <span class="update-meta-label">Version</span>
-            <span class="update-meta-value">${escapeHtml(file.version || "—")}</span>
+        <div class="update-card-details">
+          <div class="update-meta">
+            <div class="update-meta-item">
+              <span class="update-meta-label">Version</span>
+              <span class="update-meta-value">${escapeHtml(file.version || "—")}</span>
+            </div>
+            <div class="update-meta-item">
+              <span class="update-meta-label">Category</span>
+              <span class="update-meta-value">${escapeHtml(category)}</span>
+            </div>
+            <div class="update-meta-item">
+              <span class="update-meta-label">Access</span>
+              <span class="update-meta-value">Direct download</span>
+            </div>
           </div>
-          <div class="update-meta-item">
-            <span class="update-meta-label">Category</span>
-            <span class="update-meta-value">${escapeHtml(category)}</span>
-          </div>
-          <div class="update-meta-item">
-            <span class="update-meta-label">Access</span>
-            <span class="update-meta-value">Direct download</span>
-          </div>
-        </div>
 
-        <div class="update-file-info">
-          <div class="file-info-item">
-            <span class="file-info-label">Package</span>
-            <span class="file-info-value">${escapeHtml(packageName)}</span>
+          <div class="update-file-info">
+            <div class="file-info-item"><span class="file-info-label">Package</span><span class="file-info-value">${escapeHtml(packageName)}</span></div>
+            <div class="file-info-item"><span class="file-info-label">Type</span><span class="file-info-value">${escapeHtml(category)}</span></div>
+            <div class="file-info-item"><span class="file-info-label">Platform</span><span class="file-info-value">FiveM · ${escapeHtml(platform)}</span></div>
           </div>
-          <div class="file-info-item">
-            <span class="file-info-label">Type</span>
-            <span class="file-info-value">${escapeHtml(category)}</span>
-          </div>
-          <div class="file-info-item">
-            <span class="file-info-label">Platform</span>
-            <span class="file-info-value">FiveM · ${escapeHtml(platform)}</span>
-          </div>
-        </div>
 
-        <div class="license-key-box">
-          <div class="license-key-copy">
-            <span class="license-key-label">License Key</span>
-            <code>${escapeHtml(file.license_key || "Not provided")}</code>
+          <div class="license-key-box">
+            <div class="license-key-copy"><span class="license-key-label">License Key</span><code>${escapeHtml(file.license_key || "Not provided")}</code></div>
+            ${file.license_key ? `<button class="license-key-button" type="button" data-license-key="${escapeHtml(file.license_key)}">Copy</button>` : ""}
           </div>
-          ${file.license_key ? `<button class="license-key-button" type="button" data-license-key="${escapeHtml(file.license_key)}">Copy</button>` : ""}
-        </div>
 
-        <div class="license-key-box rar-password-box">
-          <div class="license-key-copy">
-            <span class="license-key-label">RAR Password</span>
-            <code>${escapeHtml(file.rar_password || "Not provided")}</code>
+          <div class="license-key-box rar-password-box">
+            <div class="license-key-copy"><span class="license-key-label">RAR Password</span><code>${escapeHtml(file.rar_password || "Not provided")}</code></div>
+            ${file.rar_password ? `<button class="license-key-button" type="button" data-rar-password="${escapeHtml(file.rar_password)}">Copy</button>` : ""}
           </div>
-          ${file.rar_password ? `<button class="license-key-button" type="button" data-rar-password="${escapeHtml(file.rar_password)}">Copy</button>` : ""}
-        </div>
 
-        <div class="update-actions">
-          ${url && downloadable
-            ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>`
-            : `<span class="update-download" aria-disabled="true">${downloadLabel}</span>`}
+          <div class="update-actions">
+            ${url && downloadable ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>` : `<span class="update-download" aria-disabled="true">${downloadLabel}</span>`}
+          </div>
         </div>
       </div>
-
-      ${!downloadable ? `
-        <div class="outdated-overlay" aria-hidden="true">
-          <div class="outdated-overlay-inner">
-            <span class="outdated-icon">×</span>
-            <strong>Download unavailable</strong>
-            <span>This release is currently not downloadable.</span>
-            ${url
-              ? `<a class="outdated-continue" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">Continue download</a>`
-              : ""}
-          </div>
-        </div>` : ""}
     </article>`;
 }
-
 async function loadReleases() {
   const container = document.getElementById("fivemReleases");
   if (!container) return;
@@ -152,7 +128,7 @@ async function loadReleases() {
     const orderedFiles = files.slice().sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
 
     container.innerHTML = orderedFiles
-      .map((file) => releaseCard(file, false))
+      .map((file) => releaseCard(file))
       .join("");
   } catch (error) {
     console.error("Failed to load releases:", error);
@@ -198,3 +174,18 @@ function showCopyNotification(message) {
   clearTimeout(window.copyNotificationTimer);
   window.copyNotificationTimer = setTimeout(() => notification.classList.remove("show"), 2200);
 }
+
+
+document.addEventListener("click", (event) => {
+  const toggle = event.target.closest(".release-toggle");
+  if (!toggle) return;
+  const card = toggle.closest(".update-card");
+  if (!card) return;
+
+  const expanded = card.classList.toggle("is-expanded");
+  card.classList.toggle("is-collapsed", !expanded);
+  toggle.setAttribute("aria-expanded", String(expanded));
+  toggle.innerHTML = expanded
+    ? 'Hide release<span class="release-toggle-icon">⌃</span>'
+    : 'View release<span class="release-toggle-icon">⌄</span>';
+});
