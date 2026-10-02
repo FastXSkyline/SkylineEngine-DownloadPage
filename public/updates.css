@@ -303,8 +303,8 @@
 }
 
 .update-card.is-outdated:hover .update-card-content{
-  opacity:.14;
-  filter:blur(3px) grayscale(.7);
+  opacity:1;
+  filter:none;
 }
 
 .outdated-overlay{
