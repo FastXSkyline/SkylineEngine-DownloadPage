@@ -1243,3 +1243,135 @@ body{
 .chart-tooltip{
   background:rgba(22,25,34,.97);
 }
+
+
+/* ============================================================
+   Skyline neutral charcoal theme — no blue cast
+   ============================================================ */
+:root{
+  --bg:#0b0b0d;
+  --shell:#111113;
+  --sidebar:#141416;
+  --surface-hover:rgba(255,255,255,.055);
+  --border:rgba(255,255,255,.075);
+  --border-strong:rgba(255,255,255,.12);
+  --muted:#99999f;
+  --faint:#66666d;
+}
+
+body{
+  background:
+    radial-gradient(900px 560px at 88% -12%,rgba(255,255,255,.055),transparent 62%),
+    radial-gradient(700px 500px at -8% 108%,rgba(255,45,45,.075),transparent 60%),
+    linear-gradient(145deg,#1b1b1e 0%,#121214 48%,#0a0a0c 100%);
+  background-color:var(--bg);
+}
+
+.layout{
+  background:linear-gradient(140deg,#151517 0%,#101012 100%);
+  background-color:var(--shell);
+}
+
+.layout:before{
+  background:
+    radial-gradient(600px 300px at 74% -4%,rgba(255,255,255,.045),transparent 70%),
+    radial-gradient(460px 320px at 6% 102%,rgba(255,45,45,.045),transparent 70%);
+}
+
+.sidebar{
+  background:
+    linear-gradient(180deg,#18181a 0%,#131315 48%,#101012 100%);
+  background-color:var(--sidebar);
+  border-right-color:rgba(255,255,255,.08);
+}
+
+.nav-stack{
+  gap:20px;
+}
+
+.nav-group{
+  padding:0 2px;
+}
+
+.nav-label{
+  color:#66666c;
+  padding:0 11px;
+  margin-bottom:8px;
+  letter-spacing:1.7px;
+}
+
+.nav-link{
+  min-height:38px;
+  padding:9px 11px;
+  margin-bottom:4px;
+  border-radius:9px;
+  color:#89898f;
+  border-color:transparent;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.nav-link .ic{
+  color:#6f6f75;
+  transition:color 180ms ease,filter 180ms ease;
+}
+
+.nav-link:hover{
+  color:#e8e8ea;
+  background:rgba(255,255,255,.045);
+  border-color:rgba(255,255,255,.065);
+  transform:translateX(2px);
+}
+
+.nav-link:hover .ic{
+  color:#c0c0c4;
+}
+
+.nav-link.active{
+  color:#fff;
+  background:
+    linear-gradient(90deg,rgba(255,45,45,.14),rgba(255,45,45,.045) 72%,rgba(255,255,255,.015));
+  border-color:rgba(255,45,45,.19);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 6px 18px rgba(0,0,0,.12);
+}
+
+.nav-link.active .ic{
+  color:#ff2d2d;
+  filter:drop-shadow(0 0 6px rgba(255,45,45,.28));
+}
+
+.nav-link.active:after{
+  right:-17px;
+  width:3px;
+  height:20px;
+  background:#ff2d2d;
+  box-shadow:0 0 12px rgba(255,45,45,.55);
+}
+
+.sidebar-card{
+  background:
+    radial-gradient(240px 100px at 0% 0%,rgba(255,45,45,.055),transparent 70%),
+    linear-gradient(145deg,#1b1b1e,#111113);
+  border-color:rgba(255,255,255,.07);
+}
+
+.live-badge{
+  background:rgba(255,255,255,.028);
+  border-color:rgba(255,255,255,.075);
+}
+
+.dropdown-menu,
+.chart-tooltip{
+  background:rgba(20,20,22,.98);
+}
+
+.stat-card,
+.panel-card{
+  background:linear-gradient(180deg,#1b1b1f,#141416);
+}
