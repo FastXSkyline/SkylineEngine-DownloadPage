@@ -36,35 +36,16 @@ function compareVersions(a, b) {
   return 0;
 }
 
-function getLatestReleaseIndex(files) {
-  if (!files.length) return -1;
-
-  let latestIndex = 0;
-
-  for (let i = 1; i < files.length; i += 1) {
-    const versionComparison = compareVersions(files[i].version, files[latestIndex].version);
-
-    if (
-      versionComparison > 0 ||
-      (versionComparison === 0 &&
-        String(files[i].updated_at || "") > String(files[latestIndex].updated_at || ""))
-    ) {
-      latestIndex = i;
-    }
-  }
-
-  return latestIndex;
-}
-
 function releaseCard(file, isLatest) {
   const version = file.version ? "v" + file.version.replace(/^v/i, "") : "Release";
   const category = file.category || "Application";
   const platform = file.platform || "Windows";
   const packageName = file.file_name || "Download package";
   const url = file.download_url || "";
-  const statusClass = isLatest ? "is-current" : "is-outdated";
-  const statusText = isLatest ? "Latest release" : "Outdated release";
-  const downloadLabel = isLatest ? "Download" : "Continue download";
+  const downloadable = Number(file.downloadable) !== 0;
+  const statusClass = downloadable ? "is-current" : "is-outdated";
+  const statusText = downloadable ? "Download available" : "Download disabled";
+  const downloadLabel = downloadable ? "Download" : "Unavailable";
 
   return `
     <article class="update-card ${statusClass}">
@@ -109,18 +90,18 @@ function releaseCard(file, isLatest) {
         </div>
 
         <div class="update-actions">
-          ${url
+          ${url && downloadable
             ? `<a class="update-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${downloadLabel}</a>`
-            : `<span class="update-download" aria-disabled="true">Download unavailable</span>`}
+            : `<span class="update-download" aria-disabled="true">${downloadLabel}</span>`}
         </div>
       </div>
 
-      ${!isLatest ? `
+      ${!downloadable ? `
         <div class="outdated-overlay" aria-hidden="true">
           <div class="outdated-overlay-inner">
-            <span class="outdated-icon">↗</span>
-            <strong>Version outdated</strong>
-            <span>A newer Skyline Engine release is available.</span>
+            <span class="outdated-icon">×</span>
+            <strong>Download unavailable</strong>
+            <span>This release is currently not downloadable.</span>
             ${url
               ? `<a class="outdated-continue" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">Continue download</a>`
               : ""}
@@ -152,17 +133,10 @@ async function loadReleases() {
       return;
     }
 
-    const latestIndex = getLatestReleaseIndex(files);
-    const orderedFiles = files
-      .map((file, index) => ({ file, index }))
-      .sort((a, b) => {
-        if (a.index === latestIndex) return -1;
-        if (b.index === latestIndex) return 1;
-        return String(b.file.updated_at || "").localeCompare(String(a.file.updated_at || ""));
-      });
+    const orderedFiles = files.slice().sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
 
     container.innerHTML = orderedFiles
-      .map(({ file, index }) => releaseCard(file, index === latestIndex))
+      .map(({ file }) => releaseCard(file, false))
       .join("");
   } catch (error) {
     console.error("Failed to load releases:", error);
