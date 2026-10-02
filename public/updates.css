@@ -176,6 +176,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
    ============================================================ */
 .update-card {
   isolation:isolate;
+  z-index:1;
   transition:
     transform 220ms cubic-bezier(.22,1,.36,1),
     border-color 220ms ease,
@@ -186,7 +187,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 
 .update-card-content {
   position:relative;
-  z-index:1;
+  z-index:2;
   transition:filter 260ms ease,opacity 260ms ease,transform 260ms ease;
 }
 
@@ -194,7 +195,7 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
 .update-card::before {
   content:"";
   position:absolute;
-  z-index:-1;
+  z-index:0;
   top:-1px;
   bottom:-1px;
   left:-8px;
