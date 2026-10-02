@@ -34,8 +34,8 @@
   content:"";
   position:absolute;
   left:-6px;
-  top:12px;
-  bottom:12px;
+  top:0;
+  bottom:0;
   width:4px;
   border-radius:5px 0 0 5px;
   background:#ff2d2d;
