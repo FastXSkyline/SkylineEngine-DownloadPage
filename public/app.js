@@ -109,6 +109,26 @@ function releaseCategory(file) {
   return raw.includes("fps") ? "fps-packs" : "free-menu";
 }
 
+function updateLibraryNavigation() {
+  document.querySelectorAll("[data-release-category]").forEach((item) => {
+    const selected = item.dataset.releaseCategory === activeReleaseCategory;
+    item.classList.toggle("active", selected);
+    if (item.tagName === "BUTTON") item.setAttribute("aria-current", selected ? "page" : "false");
+  });
+}
+
+function updateLibraryHeader() {
+  const fps = activeReleaseCategory === "fps-packs";
+  const title = document.querySelector(".hero h1");
+  const subtitle = document.querySelector(".hero .subtitle");
+  const action = document.querySelector(".refresh-btn");
+  const sectionSub = document.querySelector(".section-sub");
+  if (title) title.innerHTML = `${fps ? "FPS Packs" : "FiveM Free Menu"}<span class="dot">.</span>`;
+  if (subtitle) subtitle.textContent = fps ? "Skyline Engine FPS packs and performance-focused downloads for FiveM." : "Skyline Engine FiveM free menu releases and downloads.";
+  if (action) action.textContent = fps ? "FPS Packs" : "FiveM Free Menu";
+  if (sectionSub) sectionSub.textContent = fps ? "FPS pack downloads" : "Free menu downloads";
+}
+
 function renderReleaseCategory() {
   const container = document.getElementById("fivemReleases");
   if (!container) return;
@@ -118,6 +138,8 @@ function renderReleaseCategory() {
     return;
   }
   container.innerHTML = files.map((file) => releaseCard(file)).join("");
+  updateLibraryNavigation();
+  updateLibraryHeader();
 }
 
 async function loadReleases() {
@@ -143,11 +165,8 @@ async function loadReleases() {
       return;
     }
 
-    const orderedFiles = files.slice().sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
-
-    container.innerHTML = orderedFiles
-      .map((file) => releaseCard(file))
-      .join("");
+    allReleases = files.slice().sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
+    renderReleaseCategory();
   } catch (error) {
     console.error("Failed to load releases:", error);
     container.innerHTML = `
@@ -238,10 +257,5 @@ document.addEventListener("click", (event) => {
   const tab = event.target.closest("[data-release-category]");
   if (!tab) return;
   activeReleaseCategory = tab.dataset.releaseCategory || "free-menu";
-  document.querySelectorAll(".release-tab").forEach((item) => {
-    const selected = item === tab;
-    item.classList.toggle("active", selected);
-    item.setAttribute("aria-selected", String(selected));
-  });
   renderReleaseCategory();
 });
