@@ -736,3 +736,39 @@
     width:100%;
   }
 }
+
+
+/* Lighter dark release cards while preserving Skyline red #ff2d2d */
+.update-card{
+  background:linear-gradient(145deg,#171a23 0%,#12151d 58%,#10121a 100%);
+  border-color:rgba(255,255,255,.09);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+.update-card:hover{
+  border-color:rgba(255,255,255,.14);
+  box-shadow:
+    0 22px 52px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+.update-card::after{
+  background:rgba(255,45,45,.045);
+}
+
+.file-info-item{
+  background:rgba(255,255,255,.025);
+  border-color:rgba(255,255,255,.06);
+}
+
+.release-loading{
+  background:rgba(255,255,255,.025);
+  border-color:rgba(255,255,255,.075);
+}
+
+.license-key-box{
+  background:
+    linear-gradient(135deg,rgba(255,45,45,.065),rgba(255,255,255,.025) 55%,rgba(255,45,45,.035));
+}
