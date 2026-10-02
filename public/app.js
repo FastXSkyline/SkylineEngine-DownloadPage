@@ -168,6 +168,24 @@ document.addEventListener("click", async (event) => {
     await navigator.clipboard.writeText(key);
     const original = button.textContent;
     button.textContent = "Copied";
+    showCopyNotification("License key copied");
     setTimeout(() => { button.textContent = original; }, 1400);
   } catch (_) {}
 });
+
+function showCopyNotification(message) {
+  let notification = document.getElementById("copyNotification");
+  if (!notification) {
+    notification = document.createElement("div");
+    notification.id = "copyNotification";
+    notification.className = "copy-notification";
+    notification.innerHTML = '<span class="copy-notification-icon">✓</span><span></span>';
+    document.body.appendChild(notification);
+  }
+  notification.querySelector("span:last-child").textContent = message;
+  notification.classList.remove("show");
+  void notification.offsetWidth;
+  notification.classList.add("show");
+  clearTimeout(window.copyNotificationTimer);
+  window.copyNotificationTimer = setTimeout(() => notification.classList.remove("show"), 2200);
+}
