@@ -166,6 +166,40 @@ box-shadow:0 8px 24px rgba(255,45,45,.12);
   filter:blur(30px);
   pointer-events:none;
 }
+
+.update-card .update-card-content {
+  position:relative;
+  z-index:3;
+}
+
+.update-card {
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(145deg,#16181f 0%,#0b0d12 100%);
+}
+
+.update-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  left:-8px;
+  margin:auto;
+  width:100%;
+  height:calc(100% + 6px);
+  border-radius:15px;
+  background:linear-gradient(-45deg,#ff0000 0%,#d80000 40%);
+  z-index:-10;
+  pointer-events:none;
+  transition:all .8s cubic-bezier(.175,.95,.9,1.275);
+  box-shadow:0 20px 30px hsla(0,0%,0%,.521);
+}
+
+.update-card.is-current::before {
+  background:linear-gradient(180deg,#32d583,#1ca866);
+}
+
+.update-card.is-outdated::before {
+  background:linear-gradient(180deg,#555963,#3e4148);
+}
 .update-title { font-size:22px; }
 .update-description { max-width:760px; }
 .update-download { min-width:150px; padding:11px 18px; }
