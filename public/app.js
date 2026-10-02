@@ -133,13 +133,16 @@ function renderReleaseCategory() {
   const container = document.getElementById("fivemReleases");
   if (!container) return;
   const files = allReleases.filter((file) => releaseCategory(file) === activeReleaseCategory);
+
+  updateLibraryNavigation();
+  updateLibraryHeader();
+
   if (!files.length) {
     container.innerHTML = `<div class="release-loading"><strong>No ${activeReleaseCategory === "fps-packs" ? "FPS packs" : "free menu"} published yet.</strong><span>Published releases in this category will appear here automatically.</span></div>`;
     return;
   }
+
   container.innerHTML = files.map((file) => releaseCard(file)).join("");
-  updateLibraryNavigation();
-  updateLibraryHeader();
 }
 
 async function loadReleases() {
