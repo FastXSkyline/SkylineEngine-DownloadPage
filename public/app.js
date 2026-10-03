@@ -1,4 +1,4 @@
-const RELEASES_API = "https://skylineenginestats.anesteb8.workers.dev/api/public/fivem/files";
+const RELEASES_API = "/api/releases";
 let allReleases = [];
 let activeReleaseCategory = "free-menu";
 
