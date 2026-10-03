@@ -152,7 +152,7 @@ async function loadReleases() {
   try {
     const response = await fetch(RELEASES_API, {
       method: "GET",
-      cache: "no-store"
+      cache: "default"
     });
     const data = await response.json().catch(() => ({}));
 
@@ -227,7 +227,7 @@ document.addEventListener("click", async (event) => {
     download.setAttribute("aria-disabled", "true");
 
     try {
-      const response = await fetch(`https://skylineenginestats.anesteb8.workers.dev/api/public/fivem/files/${encodeURIComponent(id)}/download`, {
+      const response = await fetch(`/api/releases/${encodeURIComponent(id)}/download`, {
         method: "POST",
         cache: "no-store"
       });
