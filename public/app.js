@@ -2,6 +2,7 @@ const RELEASES_API = "/api/releases";
 let allReleases = [];
 let activeReleaseCategory = "free-menu";
 
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
